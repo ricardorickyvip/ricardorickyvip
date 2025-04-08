@@ -1,0 +1,230 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Escolha sua Plataforma</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 48px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 10px rgba(255, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .v12-led {
+      font-family: 'Courier New', monospace;
+      font-size: 50px;
+      color: #ff0000;
+      text-shadow: 0 0 10px red, 0 0 20px red;
+      margin-top: -10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nucleo-verde {
+      width: 12px;
+      height: 12px;
+      background: #00ff00;
+      border-radius: 50%;
+      box-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00;
+      animation: pulsar 1.2s infinite ease-in-out;
+      margin-left: 8px;
+    }
+
+    @keyframes pulsar {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.8); opacity: 0.6; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .coluna {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .botao {
+      position: relative;
+      width: 150px;
+      padding: 15px 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+      color: white;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px #00000088;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .botao::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.4);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .botao:active::after {
+      width: 300px;
+      height: 300px;
+      transition: width 0.4s ease-out, height 0.4s ease-out, opacity 0.5s;
+      opacity: 0;
+    }
+
+    .botao:active {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3);
+    }
+
+    .mobet { background-color: #cc0000; }
+    .premierbet { background-color: #2ecc71; }
+    .bet888 { background-color: #f39c12; }
+    .afribet { background-color: #2980b9; }
+    .melbet { background-color: #333; color: #f1c40f; }
+    .elephantbet { background-color: #ecf0f1; color: #2c3e50; }
+    .bantubet { background-color: #2c3e50; }
+    .ebet { background-color: #c0392b; }
+
+    .aviso {
+      margin-top: 40px;
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    .mensagem {
+      font-family: 'Courier New', monospace;
+      color: #00ff00;
+      font-size: 14px;
+      margin-top: 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+      white-space: pre-wrap;
+    }
+
+    .digitando::after {
+      content: '|';
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .subtitulo {
+      font-size: 20px;
+      color: #bbb;
+      margin-top: 10px;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0, 255, 0, 0.7);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    Preditor
+    <span class="v12-led">V12<span class="nucleo-verde"></span></span>
+  </h1>
+
+  <p class="subtitulo">Escolha a sua plataforma:</p>
+
+  <div class="container">
+    <div class="coluna">
+      <button class="botao mobet" onclick="hackPlatform('MOBET')">MOBET</button>
+      <button class="botao premierbet" onclick="hackPlatform('PREMIER BET')">PREMIERBET</button>
+    </div>
+    <div class="coluna">
+      <button class="botao bet888" onclick="hackPlatform('888BET')">888BET</button>
+      <button class="botao afribet" onclick="hackPlatform('AFRIBET')">AFRIBET</button>
+    </div>
+    <div class="coluna">
+      <button class="botao melbet" onclick="hackPlatform('MELBET')">MELBET</button>
+      <button class="botao elephantbet" onclick="hackPlatform('ELEPHANTBET')">ELEPHANTBET</button>
+    </div>
+    <div class="coluna">
+      <button class="botao bantubet" onclick="hackPlatform('BANTUBET')">BANTUBET</button>
+      <button class="botao ebet" onclick="hackPlatform('EBET')">EBET</button>
+    </div>
+  </div>
+
+  <p class="aviso">
+    Atenção: não me responsabilizo pelos atos de risco deste aplicativo.
+  </p>
+
+  <div id="mensagemFinal" class="mensagem"></div>
+
+  <script>
+    let mensagemMostrada = false;
+
+    function escreverTextoGradualmente(texto, elemento, delay = 50, callback = null) {
+      let i = 0;
+      function escrever() {
+        if (i < texto.length) {
+          elemento.textContent += texto.charAt(i);
+          i++;
+          setTimeout(escrever, delay);
+        } else {
+          if (callback) callback();
+        }
+      }
+      escrever();
+    }
+
+    function hackPlatform(platform) {
+      if (mensagemMostrada) return;
+
+      mensagemMostrada = true;
+      const divMensagem = document.getElementById('mensagemFinal');
+      divMensagem.textContent = "";
+      divMensagem.classList.add("digitando");
+
+      const textoInicial = `Por favor, aguarde. A plataforma ${platform} está sendo descriptografada...`;
+
+      escreverTextoGradualmente(textoInicial, divMensagem, 40, function () {
+        divMensagem.classList.remove("digitando");
+        setTimeout(() => {
+          divMensagem.textContent = "";
+          escreverTextoGradualmente(`${platform} descriptografada com sucesso!`, divMensagem, 50);
+
+          // Redireciona automaticamente após 7 segundos
+          setTimeout(() => {
+            window.location.href = "https://predictor-v12-pro-sistema-ios-and-and.netlify.app/";
+          }, 7000);
+        }, 7000);
+      });
+    }
+  </script>
+
+</body>
+</html>
